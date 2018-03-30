@@ -42,7 +42,8 @@ class App extends Component {
   }
 
   removePersonHandler = (indexOfPerson) => {
-    const localPersons = this.state.persons;
+    // const localPersons = this.state.persons.slice();
+    const localPersons = [...this.state.persons];
     localPersons.splice(indexOfPerson,1);
     this.setState({persons: localPersons});
   }
