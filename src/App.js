@@ -41,11 +41,11 @@ class App extends Component {
     this.setState({showPersons: !this.state.showPersons})
   }
 
-  // removePersonHandler = (indexOfPerson) => {
-  //   const localPersons = this.state.persons;
-  //   localPersons.splice(indexOfPerson,1);
-  //   this.setState({persons: localPersons});
-  // }
+  removePersonHandler = (indexOfPerson) => {
+    const localPersons = this.state.persons;
+    localPersons.splice(indexOfPerson,1);
+    this.setState({persons: localPersons});
+  }
 
   render() {
     const buttonStyle = {
@@ -59,12 +59,14 @@ class App extends Component {
     let personsCode = null;
     if(this.state.showPersons) {
       personsCode = (
-        
+
         <div> 
-          {this.state.persons.map( person => {
+          {this.state.persons.map( (person,indexOfPerson) => {
             return <Person 
                 name={person.name} 
-                age={person.age} />
+                age={person.age} 
+                clickParagraph={() => this.removePersonHandler(indexOfPerson)} 
+                />
           })}
           
         </div>
