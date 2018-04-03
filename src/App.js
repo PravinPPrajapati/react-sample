@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import appCssClasses from './App.css';
 import Person from './Person/Person';
 
 
@@ -81,21 +81,17 @@ class App extends Component {
         </div>
       );
       buttonStyle.backgroundColor='blue';
-      buttonStyle[':hover']= {
-        backgroundColor: 'yellow',
-        color: 'black'
-      };
     }
     
     let cssClasses = [];
     if(this.state.persons.length <= 2)
-      cssClasses.push('red');
+      cssClasses.push(appCssClasses.red);
     if(this.state.persons.length <= 1)
-      cssClasses.push('bold');
+      cssClasses.push(appCssClasses.bold);
 
     return (
       
-      <div className="App">
+      <div className={appCssClasses.App}>
         <h1>Hi, I am beginner</h1>
         <p className={cssClasses.join(' ')}> another paragraph</p>
         <button
