@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import appCssClasses from './App.css';
 import Person from './Person/Person';
-
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -64,11 +64,12 @@ class App extends Component {
 
         <div>
           {this.state.persons.map((person, indexOfPerson) => {
-            return <Person name={person.name} age={person.age}
-              clickParagraph={() => this.removePersonHandler(indexOfPerson)}
-              changeText={(event) => this.changeNameHandler(event, person.id)}
-              key={person.id}
-            />
+            return <ErrorBoundary key={person.id} > 
+              <Person name={person.name} age={person.age}
+                clickParagraph={() => this.removePersonHandler(indexOfPerson)}
+                changeText={(event) => this.changeNameHandler(event, person.id)}
+              /> 
+            </ErrorBoundary>
           })}
 
         </div>
@@ -85,14 +86,13 @@ class App extends Component {
     return (
       
       <div className={appCssClasses.App}>
-        <h1>Hi, I am beginner</h1>
+        <h1>Hi, I am beginner</h1> 
         <p className={cssClasses.join(' ')}> another paragraph</p>
         <button
           className={buttonClass}
           onClick={this.togglePersonHandler}>Toggle Persons</button>
         {personsCode}
       </div>
-    
     );
     //return React.createElement('div',{className:"App"},React.createElement('h1',null, 'Hi, actual react syntax'))
 
