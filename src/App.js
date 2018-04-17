@@ -3,96 +3,38 @@ import appCssClasses from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
-  state = {
-    persons: [
-      { id: 'personid1', name: "FirstPerson", age: 28 },
-      { id: 'personid2', name: "2ndPerson", age: 29 },
-      { id: 'personid3', name: "3rdPerson", age: 30 },
-    ],
-    showPersons: true
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: []
+    }
   }
 
-  switchNameHandler = (newName) => {
-    //console.log('Clicked on button');
-    this.setState(
-      {
-        persons: [
-          { name: newName, age: 28 },
-          { name: "2ndPerson", age: 29 },
-          { name: "3rdPerson", age: 50 },
-        ]
-      }
-    )
-  }
-
-  changeNameHandler = (event, personId) => {
-    const personIndex = this.state.persons.findIndex(p => {
-      return p.id === personId;
-    });
-    console.log(personIndex);
-    const person = this.state.persons[personIndex];
-    person.name = event.target.value;
-
-    const localPersons = this.state.persons;
-    localPersons[personIndex] = person;
-
-    this.setState(
-      {
-        persons: localPersons
-      }
-    )
-  }
-
-  togglePersonHandler = () => {
-    this.setState({ showPersons: !this.state.showPersons })
-  }
-
-  removePersonHandler = (indexOfPerson) => {
-    // const localPersons = this.state.persons.slice();
-    const localPersons = [...this.state.persons];
-    localPersons.splice(indexOfPerson, 1);
-    this.setState({ persons: localPersons });
+  componentDidMount() {
+    fetch('http://localhost:8086/product')
+      .then(function (response) {
+        return response.json();
+      })
+      .then((data) => {
+        this.setState({ product: data  });
+      })
+      .catch(function (err) {
+        console.log('error caught', err);
+      });
   }
 
   render() {
-    let buttonClass = '';
-
-    let personsCode = null;
-    if (this.state.showPersons) {
-      personsCode = (
-
-        <div>
-          {this.state.persons.map((person, indexOfPerson) => (
-              <Person key={person.id} name={person.name} age={person.age}
-                clickParagraph={() => this.removePersonHandler(indexOfPerson)}
-                changeText={(event) => this.changeNameHandler(event, person.id)}
-              /> 
-          ))}
-
-        </div>
-      );
-      buttonClass = appCssClasses.Red;
-    }
-    
-    let cssClasses = [];
-    if(this.state.persons.length <= 2)
-      cssClasses.push(appCssClasses.red);
-    if(this.state.persons.length <= 1)
-      cssClasses.push(appCssClasses.bold);
-
     return (
-      
-      <div className={appCssClasses.App}>
-        <h1>Hi, I am beginner</h1> 
-        <p className={cssClasses.join(' ')}> another paragraph</p>
-        <button
-          className={buttonClass}
-          onClick={this.togglePersonHandler}>Toggle Persons</button>
-        {personsCode}
+      <div>
+        { 
+          this.state.product.map((p) => {
+           return <div key={p.productId}>{p.productName}-{p.productDesc}</div>
+          }) 
+        }
+        <div key="">{this.props.name}</div>
       </div>
     );
-    //return React.createElement('div',{className:"App"},React.createElement('h1',null, 'Hi, actual react syntax'))
-
   }
 }
 
