@@ -1,13 +1,16 @@
-import React from 'react';
+import React,{Component} from 'react';
 import personCssClasses from './Person.css';
 
-const person = (props) => {
-    return ( 
-        <div className={personCssClasses.Person} >
-            <p onClick={props.clickParagraph}> I am {props.name} and I am {props.age} Year old. {props.children}</p>
-            <input type='text' value={props.name} onChange={props.changeText} />
-        </div> 
-    )
-};
+class Person extends Component {
+    render(){
+        return ( 
+            <div className={personCssClasses.Person} >
+                <p onClick={this.props.clickParagraph}> I am {this.props.name} and I am {this.props.age} Year old. </p>
+                <p> {this.props.children}</p>
+                <input type='text' value={this.props.name} onChange={this.props.changeText} />
+            </div> 
+        )
+    }
+}
 
-export default person;
+export default Person;
