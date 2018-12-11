@@ -1,23 +1,23 @@
 import React from 'react';
-import CockpitCssClasses from './Cockpit.css';
+import cockpitCssClasses from './Cockpit.css';
 
 const cockpit = (props) => {
-    let buttonClass = '';
+    let buttonClass = ''; 
 
     if (props.showPersons) {
-        buttonClass = CockpitCssClasses.Red;
+        buttonClass = cockpitCssClasses.Red;
     }
 
     let cssClasses = [];
     if (props.persons.length <= 2)
-        cssClasses.push(CockpitCssClasses.red);
+        cssClasses.push(cockpitCssClasses.red);
     if (props.persons.length <= 1)
-        cssClasses.push(CockpitCssClasses.bold);
+        cssClasses.push(cockpitCssClasses.bold);
 
 
     return (
-        <div className={CockpitCssClasses.Cockpit}>
-            <h1>Hi, I am beginner</h1>
+        <div className={cockpitCssClasses.Cockpit}>
+            <h1>{props.appTitle}</h1>
             <p className={cssClasses.join(' ')}> another paragraph</p>
             <button
                 className={buttonClass}
