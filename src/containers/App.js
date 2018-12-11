@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import appCssClasses from './App.css';
 import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -55,37 +56,22 @@ class App extends Component {
   }
 
   render() {
-    let buttonClass = '';
-
     let personsCode = null;
-    if (this.state.showPersons) {
-      personsCode = (
 
-        <div>
-          <Persons 
+    if (this.state.showPersons) {
+      personsCode = <Persons 
             persons={this.state.persons} 
             clickParagraph={this.removePersonHandler}
-            changeText={this.changeNameHandler} />
- 
-        </div>
-      );
-      buttonClass = appCssClasses.Red;
+            changeText={this.changeNameHandler} />;
     }
     
-    let cssClasses = [];
-    if(this.state.persons.length <= 2)
-      cssClasses.push(appCssClasses.red);
-    if(this.state.persons.length <= 1)
-      cssClasses.push(appCssClasses.bold);
-
     return (
-      
       <div className={appCssClasses.App}>
-        <h1>Hi, I am beginner</h1> 
-        <p className={cssClasses.join(' ')}> another paragraph</p>
-        <button
-          className={buttonClass}
-          onClick={this.togglePersonHandler}>Toggle Persons</button>
+        <Cockpit 
+          showPersons={this.state.showPersons} 
+          persons={this.state.persons}
+          clicked={this.togglePersonHandler}
+          />
         {personsCode}
       </div>
     );
