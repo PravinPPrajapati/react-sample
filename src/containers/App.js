@@ -16,7 +16,20 @@ class App extends Component {
   componentDidMount(){
     console.log('[App.js]. Inside componentDidMount()');
   }
-  
+
+  shouldComponentUpdate(nextProps, nextState){
+    console.log('[UPDATE App.js]. Inside shouldComponentUpdate()', nextProps, nextState);
+    return true; //nextProps.persons !== this.props.persons;
+  }
+
+  componentWillUpdate(nextProps, nextState){
+      console.log('[UPDATE App.js]. Inside componentWillUpdate()', nextProps, nextState);
+  }
+
+  componentDidUpdate(){
+      console.log('[UPDATE App.js]. Inside componentDidUpdate()');
+  }
+    
   state = {
     persons: [
       { id: 'personid1', name: "FirstPerson", age: 28 },
