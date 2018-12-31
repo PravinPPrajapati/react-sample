@@ -1,6 +1,6 @@
 import React from 'react';
 import cockpitCssClasses from './Cockpit.css';
-import Aux from '../../hoc/Aux';
+import wrapChildComponent from '../../hoc/WrapChildComponent';
 
 const cockpit = (props) => {
     let buttonClass = cockpitCssClasses.Button; 
@@ -17,13 +17,13 @@ const cockpit = (props) => {
 
 
     return (
-        <Aux>
+        <wrapChildComponent>
             <h1>{props.appTitle}</h1>
             <p className={cssClasses.join(' ')}> another paragraph</p>
             <button
                 className={buttonClass}
                 onClick={props.clicked}>Toggle Persons</button>
-        </Aux>
+        </wrapChildComponent>
     );
 
 };
