@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import personCssClasses from './Person.css';
+import WithCssClass from '../../../hoc/WithCssClass';
 
 class Person extends Component {
     constructor(props) {
@@ -18,11 +19,11 @@ class Person extends Component {
     render(){
         console.log('[Person.js] Inside render()')
         return ( 
-            <div className={personCssClasses.Person} >
+            <WithCssClass classes={personCssClasses.Person} >
                 <p onClick={this.props.clickParagraph}> I am {this.props.name} and I am {this.props.age} Year old. </p>
                 <p> {this.props.children}</p>
                 <input type='text' value={this.props.name} onChange={this.props.changeText} />
-            </div> 
+            </WithCssClass> 
         )
 
         // return [
