@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import personCssClasses from './Person.css';
-import WithCssClass from '../../../hoc/WithCssClass';
+import WrapChildComponent from '../../../hoc/WrapChildComponent';
+import withCssUsingClassWrap from '../../../hoc/withCssUsingClassWrap';
 
 class Person extends Component {
     constructor(props) {
@@ -19,11 +20,11 @@ class Person extends Component {
     render(){
         console.log('[Person.js] Inside render()')
         return ( 
-            <WithCssClass classes={personCssClasses.Person} >
+            <WrapChildComponent >
                 <p onClick={this.props.clickParagraph}> I am {this.props.name} and I am {this.props.age} Year old. </p>
                 <p> {this.props.children}</p>
                 <input type='text' value={this.props.name} onChange={this.props.changeText} />
-            </WithCssClass> 
+            </WrapChildComponent> 
         )
 
         // return [
@@ -34,4 +35,4 @@ class Person extends Component {
     }
 }
 
-export default Person;
+export default withCssUsingClassWrap(Person, personCssClasses.Person) ;

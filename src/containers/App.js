@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import appCssClasses from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithCssClass from '../hoc/WithCssClass';
+import WrapChildComponent from '../hoc/WrapChildComponent';
+import withCssUsingClassWrap from '../hoc/withCssUsingClassWrap';
 
 class App extends PureComponent {
   constructor(props){
@@ -96,7 +97,7 @@ class App extends PureComponent {
     }
     
     return (
-      <WithCssClass classes={appCssClasses.App}>
+      <WrapChildComponent>
         <button onClick={()=> this.setState({showPersons: true})}>Show Persons</button>
         <Cockpit 
           appTitle={this.props.title}
@@ -105,11 +106,11 @@ class App extends PureComponent {
           clicked={this.togglePersonHandler}
           />
         {personsCode}
-      </WithCssClass>
+      </WrapChildComponent>
     );
     //return React.createElement('div',{className:"App"},React.createElement('h1',null, 'Hi, actual react syntax'))
 
   }
 }
 
-export default App;
+export default withCssUsingClassWrap(App, appCssClasses.App);
