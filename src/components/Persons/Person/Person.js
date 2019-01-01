@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import personCssClasses from './Person.css';
 import WrapChildComponent from '../../../hoc/WrapChildComponent';
 import withCssUsingClassWrap from '../../../hoc/withCssUsingClassWrap';
+import PropTypes from 'prop-types';
 
 class Person extends Component {
     constructor(props) {
@@ -34,5 +35,12 @@ class Person extends Component {
         // ]
     }
 }
+
+Person.propTypes = {
+    clickParagraph: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changeText: PropTypes.func
+};
 
 export default withCssUsingClassWrap(Person, personCssClasses.Person) ;
