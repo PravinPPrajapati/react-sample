@@ -64,8 +64,7 @@ class App extends PureComponent {
     console.log(personIndex);
     const person = this.state.persons[personIndex];
     person.name = event.target.value;
-
-    const localPersons = this.state.persons;
+    const localPersons = [...this.state.persons];
     localPersons[personIndex] = person;
 
     this.setState(
